@@ -1,0 +1,50 @@
+sudo apt install openjdk-8-jdk
+
+sudo apt install ssh
+
+ssh-keygen -r rsa -P '' -f ~/.ssh/id_rsa
+
+cat ~/.ssh/id_rsa.pub >> ~/.ssh_authorized_keys
+
+chmod 0600 ~/.ssh/ssh_authorized_keys
+
+wget http://apache.mirrors.tds.net/hadoop/common/hadoop-2.7.7/hadoop-2.7.7.tar.gz
+
+tar -xvzf hadoop-2.7.7.tar.gz
+
+cd hadoop-2.7.7
+
+sed -i 's#export JAVA_HOME=${JAVA_HOME}#export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")#g' etc/hadoop/hadoop-env.sh
+
+## Pour tester Hadoop
+
+mkdir input
+
+cp etc/hadoop/*.xml input
+
+bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.7.jar grep input output 'principal[.]*'
+
+cat output/*
+
+cd ..
+
+sudo mv hadoop-2.7.7 /usr/local/hadoop
+
+echo "export PATH=$PATH:/usr/local/hadoop/bin/" >> ~/.bashrc
+
+source ~/.bashrc
+
+## Tapons Hadoop dans le terminal 
+
+sudo mkdir /opt/gradle
+
+wget https://services.gradle.org/distributions/gradle-2.5-bin.zip
+
+sudo unzip -d /opt/gradle gradle-2.5-bin.zip
+
+echo "export PATH=$PATH:/opt/gradle/gradle-2.5/bin" >> ~/.bashrc
+
+source ~/.bashrc
+
+gradle -v
+

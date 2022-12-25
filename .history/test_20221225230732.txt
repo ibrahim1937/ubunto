@@ -1,0 +1,5 @@
+sudo apt install openjdk-8-jdk
+
+sudo apt install ssh
+
+ssh-keygen -r rsa -P '' -f ~/.ssh/id_rsa
