@@ -120,25 +120,4 @@ examples/facecounter/src/main/java/org/hipi/examples/
 
 ##creer un nouveau dossier nommé countimages dans hippi et importer les images à traiter
 
-## Convertir cette image en une image bundle hipi
-
-tools/hibImport.sh ~/hipi/countImages countimages.hib
-
- 
-## Builder notre méthode avec ces deux commandes
-
-gradle examples:facecounter:jar
-
-hadoop jar examples/facecounter/build/libs/facecounter.jar
-
-## Executer la  methode
-
-hadoop jar examples/facecounter/build/libs/facecounter.jar countimages.hib facecounter_numberss
- 
-hadoop fs -ls facecounter_numberss
-
-hadoop fs -cat facecounter_numberss/part-r-00000
-
-
-
 
